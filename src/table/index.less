@@ -1,0 +1,110 @@
+.table-box {
+  position: relative;
+  overflow: auto;
+  // z-index: 10;
+
+  .menu {
+    position: fixed;
+    min-width: 120px;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    z-index: 10;
+    border-radius: 4px;
+    padding: 4px 0;
+
+    .divider {
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .menu-item {
+      padding: 6px 16px;
+      font-size: 14px;
+
+      span {
+        margin-right: 4px;
+      }
+    }
+
+    .menu-item:hover {
+      background: #f0f0f0;
+    }
+  }
+
+  .table-editor {
+    table-layout: fixed;
+    border-collapse: collapse;
+    cursor: pointer;
+    // width: 100%;
+
+    tr {
+      height: 35px;
+      min-height: 35px;
+    }
+
+    td {
+      word-break: break-all;
+      min-height: 35px;
+      vertical-align: top;
+
+      > div {
+        height: 100%;
+        padding: 4px 8px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .td_bg {
+      background-color: #f0f0f0;
+
+      &.td-edit {
+        outline: 2px solid #0589f3;
+        outline-offset: -2px;
+        cursor: text;
+      }
+    }
+    td:focus {
+      outline: 2px solid #0589f3;
+      outline-offset: -2px;
+    }
+
+    &.table-bordered {
+      td {
+        border: 1px solid #d9d9d9;
+      }
+    }
+  }
+
+  .table-wrap {
+    flex: 1;
+
+    .table-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+
+      .bar-item {
+        height: 12px;
+        border: 1px solid #E8E8E8;
+        border-right-width: 0;
+        position: relative;
+
+        .row-trigger {
+          position: absolute;
+          right: -4px;
+          top: -1px;
+          width: 7px;
+          height: 16px;
+          z-index: 10;
+          cursor: col-resize;
+        }
+      }
+      .bar-item:last-child {
+        border-right-width: 1px;
+      }
+    }
+  }
+}

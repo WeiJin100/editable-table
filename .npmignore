@@ -1,0 +1,7 @@
+src/
+node_modules/
+.tsconfig.json
+vite.config.ts
+index.html
+main.tsx
+package-lock.json

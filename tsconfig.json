@@ -1,0 +1,28 @@
+{
+  // "compileOnSave": false,
+  "include": ["src"],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+        "dom",
+        "es2015",
+        "es2016"
+    ],
+    "jsx": "react",
+    "target": "es2016",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    // "noEmit": true
+  }
+}
