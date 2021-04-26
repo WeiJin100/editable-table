@@ -3,6 +3,7 @@ import { TableProps } from './table';
 import Menu from './menu';
 import useIndex from './hooks/useIndex';
 import './index.less';
+import ReactDOM from 'react-dom';
 
 const TableEditor: FC<TableProps> = props => {
   const barsRef = useRef(null);
@@ -32,12 +33,35 @@ const TableEditor: FC<TableProps> = props => {
     resetSecondLocation,
   });
 
-  const onCellClick = (e: any, lo: number[]) => {
-    e.stopPropagation();
-    if (lo.join('') !== firstClickLocation.join('')) {
-      setfirstClickLocation(lo);
+  const onCellClick = () => {
+    // 单击清楚编辑区域
+    const dom = document.querySelector('.table-editable')
+    if (dom) {
+      ReactDOM.unmountComponentAtNode(dom)
     }
   };
+
+  const onDoubleClick = (e: any) => {
+    const domValue = e.target.getBoundingClientRect()
+
+    const ele = (
+      <div
+        style={{
+          minHeight: domValue.height + 1, // minHeight，可实现编辑区域随内容扩展
+          width: domValue.width + 1,
+          left: domValue.left,
+          top: domValue.top,
+        }}
+        className="table-edit-area"
+        onInput={onInput}
+        contentEditable={true}
+        suppressContentEditableWarning={true}
+        dangerouslySetInnerHTML={{ __html: e.target.innerHTML }}
+      >
+      </div>
+    );
+    ReactDOM.render(ele, document.querySelector('.table-editable'))
+  }
 
   const getContentEditable = (index: number, i: number) => {
     return [index, i].join('') === firstClickLocation.join('') && firstClickLocation.length === 2;
@@ -52,6 +76,7 @@ const TableEditor: FC<TableProps> = props => {
 
   return (
     <div className="table-box" id={id}>
+      <div className="table-editable"></div>
       {visible && (
         <Menu
           lang={lang}
@@ -97,20 +122,16 @@ const TableEditor: FC<TableProps> = props => {
                 <td
                   key={`${t.id}`}
                   style={{
+                    padding: '4px 8px',
                     ...tdStyle,
                     ...(t.props && (t.props.rowSpan === 0 || t.props.colSpan === 0) ? { display: 'none' } : {}),
                   }}
                   {...(t.props ? { colSpan: t.props.colSpan, rowSpan: t.props.rowSpan } : {})}
-                  onClick={(e: any) => onCellClick(e, [index, i])}
+                  onClick={onCellClick}
+                  onDoubleClick={(e: any) => onDoubleClick(e)}
                   className={getContentEditable(index, i) ? 'td_bg td-edit' : ''}
+                  dangerouslySetInnerHTML={{ __html: t.content }}
                 >
-                  <div
-                    contentEditable={
-                      /* 两次点击可编辑 */
-                      getContentEditable(index, i)
-                    }
-                    onInput={onInput}
-                  ></div>
                 </td>
               ))}
             </tr>

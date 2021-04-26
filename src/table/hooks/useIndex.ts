@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import $ from 'jquery';
 import { getDomOffsetLeft, getDomOffsetTop, uuid } from '../../utils/common';
 import { TableProps, TableRowsProps } from '../table';
+import ReactDOM from 'react-dom';
 
 let mouse_begin = { x: 0, y: 0 };
 let mouse_end = { x: 0, y: 0 };
@@ -162,6 +163,11 @@ const useIndex = (props: UseIndexProps) => {
     $(`#${id} .table-editor td`).removeClass('td_bg'); //点击表格之外的部分，清空所有选中
     $(`#${id} .table-editor td`).off('mouseover');
     setVisible(false);
+    // 清除编辑区域
+    const dom = document.querySelector('.table-editable')
+    if (dom) {
+      ReactDOM.unmountComponentAtNode(dom)
+    }
   };
 
   const onMenu = (type: string) => {
@@ -218,7 +224,7 @@ const useIndex = (props: UseIndexProps) => {
           if (dom) {
             const tbody = dom.children[showDragBar ? 1 : 0];
 
-            tbody.children[start.x].children[start.y].innerText = mergeStr;
+            tbody.children[start.x].children[start.y].innerHTML = mergeStr;
           }
         } else {
           temp[start.x].children[end.y] = {
@@ -248,7 +254,7 @@ const useIndex = (props: UseIndexProps) => {
             if (dom) {
               const tbody = dom.children[showDragBar ? 1 : 0];
 
-              tbody.children[start.x].children[start.y].innerText = mergeStr;
+              tbody.children[start.x].children[start.y].innerHTML = mergeStr;
             }
           } else {
             temp[start.x + i].children[j] = {
@@ -392,7 +398,9 @@ const useIndex = (props: UseIndexProps) => {
   };
 
   const onInput = (e: any) => {
-    const v = e.currentTarget.innerText;
+    const v = e.currentTarget.innerHTML;
+    console.log(e)
+    // const text = v.replaceAll("\n", "<br />")
     const temp = JSON.parse(JSON.stringify([...value.children]));
     temp[mouse_begin.x].children[mouse_begin.y].content = v;
     // setContent(temp);

@@ -18,8 +18,8 @@ const value = {
       id: '1231qhjffg31aqq',
       children: [
         { id: 'asdawqsdhwe', content: '1<br/>2<br/>3' },
-        { id: 'asdawdfqasawe', content: '' },
-        { id: 'asdawzxccvbqwe', content: '' },
+        { id: 'asdawdfqasawe', content: '', props: { rowSpan: 1, colSpan: 2 } },
+        { id: 'asdawzxccvbqwe', content: '', props: { colSpan: 0 } },
       ],
     },
     {
