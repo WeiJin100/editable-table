@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/WeiJin100/editable-table/compare/v0.2.2...v0.2.3) (2021-04-27)
+
+
+### Bug Fixes
+
+* 解决行高不一致问题 ([cbbf8ae](https://github.com/WeiJin100/editable-table/commit/cbbf8aec17164473a513ba66b78a13c8a7a10d2f))
+
 ### [0.2.2](https://github.com/WeiJin100/editable-table/compare/v0.2.1...v0.2.2) (2021-04-27)
 
 
