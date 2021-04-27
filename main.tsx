@@ -68,6 +68,7 @@ const Index = () => {
         value={v2}
         showDragBar={true}
         lang="zh"
+        style={{ fontSize: '20px' }}
         onChange={(v: any) => {
           console.log(v);
           setV2(v);

@@ -33,6 +33,13 @@ const TableEditor: FC<TableProps> = props => {
     resetSecondLocation,
   });
 
+  const tdStyle = useMemo(() => {
+    if (style && typeof style === 'object') {
+      return style;
+    }
+    return {};
+  }, [style]);
+
   const onCellClick = () => {
     // 单击清楚编辑区域
     const dom = document.querySelector('.table-editable')
@@ -51,6 +58,7 @@ const TableEditor: FC<TableProps> = props => {
           width: domValue.width + 1,
           left: domValue.left,
           top: domValue.top,
+          ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {})
         }}
         className="table-edit-area"
         onInput={onInput}
@@ -84,13 +92,6 @@ const TableEditor: FC<TableProps> = props => {
   const getContentEditable = (index: number, i: number) => {
     return [index, i].join('') === firstClickLocation.join('') && firstClickLocation.length === 2;
   };
-
-  const tdStyle = useMemo(() => {
-    if (style && typeof style === 'object') {
-      return style;
-    }
-    return {};
-  }, [style]);
 
   return (
     <div className="table-box" id={id}>
@@ -142,6 +143,7 @@ const TableEditor: FC<TableProps> = props => {
                   style={{
                     padding: '4px 8px',
                     ...tdStyle,
+                    ...(tdStyle.fontSize ? { lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {}),
                     ...(t.props && (t.props.rowSpan === 0 || t.props.colSpan === 0) ? { display: 'none' } : {}),
                   }}
                   {...(t.props ? { colSpan: t.props.colSpan, rowSpan: t.props.rowSpan } : {})}
