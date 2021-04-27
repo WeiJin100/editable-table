@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/WeiJin100/editable-table/compare/v0.2.3...v0.2.4) (2021-04-27)
+
+
+### Bug Fixes
+
+* 动态修改fontsize和lineheight ([272b3e3](https://github.com/WeiJin100/editable-table/commit/272b3e35909dedbb48a6131fe0f73770b207fa63))
+
 ### [0.2.3](https://github.com/WeiJin100/editable-table/compare/v0.2.2...v0.2.3) (2021-04-27)
 
 
