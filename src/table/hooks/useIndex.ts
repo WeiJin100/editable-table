@@ -224,7 +224,7 @@ const useIndex = (props: UseIndexProps) => {
           if (dom) {
             const tbody = dom.children[showDragBar ? 1 : 0];
 
-            tbody.children[start.x].children[start.y].innerHTML = mergeStr;
+            tbody.children[start.x].children[start.y].children[0].innerHTML = mergeStr;
           }
         } else {
           temp[start.x].children[end.y] = {
@@ -254,7 +254,7 @@ const useIndex = (props: UseIndexProps) => {
             if (dom) {
               const tbody = dom.children[showDragBar ? 1 : 0];
 
-              tbody.children[start.x].children[start.y].innerHTML = mergeStr;
+              tbody.children[start.x].children[start.y].children[0].innerHTML = mergeStr;
             }
           } else {
             temp[start.x + i].children[j] = {
@@ -398,9 +398,9 @@ const useIndex = (props: UseIndexProps) => {
   };
 
   const onInput = (e: any) => {
-    const v = e.currentTarget.innerHTML;
+    const v = e.target.innerHTML;
     console.log(e)
-    // const text = v.replaceAll("\n", "<br />")
+    // const text = v.replaceAll("\n\n", "\n").replaceAll("\n", "<br />")
     const temp = JSON.parse(JSON.stringify([...value.children]));
     temp[mouse_begin.x].children[mouse_begin.y].content = v;
     // setContent(temp);

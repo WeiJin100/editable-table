@@ -41,8 +41,8 @@ const TableEditor: FC<TableProps> = props => {
     }
   };
 
-  const onDoubleClick = (e: any) => {
-    const domValue = e.target.getBoundingClientRect()
+  const renderEditArea = (dom: any) => {
+    const domValue = dom.getBoundingClientRect()
 
     const ele = (
       <div
@@ -56,11 +56,29 @@ const TableEditor: FC<TableProps> = props => {
         onInput={onInput}
         contentEditable={true}
         suppressContentEditableWarning={true}
-        dangerouslySetInnerHTML={{ __html: e.target.innerHTML }}
+        dangerouslySetInnerHTML={{ __html: dom.innerHTML }}
       >
       </div>
     );
     ReactDOM.render(ele, document.querySelector('.table-editable'))
+  }
+
+  const onDouble = (e: any) => {
+    console.log(e, 'div')
+    let dom = e.target;
+
+    while (dom.tagName.toLocaleLowerCase() !== 'td') {
+      dom = dom.parentElement
+    }
+    renderEditArea(dom)
+  }
+
+  const onDoubleClick = (e: any) => {
+    console.log(e, 'td')
+    if (e.target.tagName.toLocaleLowerCase() !== 'td') {
+      return
+    }
+    renderEditArea(e.target)
   }
 
   const getContentEditable = (index: number, i: number) => {
@@ -130,8 +148,9 @@ const TableEditor: FC<TableProps> = props => {
                   onClick={onCellClick}
                   onDoubleClick={(e: any) => onDoubleClick(e)}
                   className={getContentEditable(index, i) ? 'td_bg td-edit' : ''}
-                  dangerouslySetInnerHTML={{ __html: t.content }}
+                  // dangerouslySetInnerHTML={{ __html: t.content }}
                 >
+                  <div dangerouslySetInnerHTML={{ __html: t.content }} onDoubleClick={(e: any) => onDouble(e)}></div>
                 </td>
               ))}
             </tr>
