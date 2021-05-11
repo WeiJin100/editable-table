@@ -5,3 +5,4 @@ vite.config.ts
 index.html
 main.tsx
 package-lock.json
+.npmrc
