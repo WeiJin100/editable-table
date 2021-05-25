@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/WeiJin100/editable-table/compare/v0.2.4...v0.2.5) (2021-05-25)
+
+
+### Bug Fixes
+
+* 双击编辑区自动对焦且光标移到到行尾 ([a97164a](https://github.com/WeiJin100/editable-table/commit/a97164a29bd269b87a12944d58444d39fa63d509))
+
 ### [0.2.4](https://github.com/WeiJin100/editable-table/compare/v0.2.3...v0.2.4) (2021-04-27)
 
 
