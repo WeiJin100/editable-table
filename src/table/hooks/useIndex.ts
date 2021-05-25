@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import $ from 'jquery';
 import { getDomOffsetLeft, getDomOffsetTop, uuid } from '../../utils/common';
 import { TableProps, TableRowsProps } from '../table';
-import ReactDOM from 'react-dom';
 
 let mouse_begin = { x: 0, y: 0 };
 let mouse_end = { x: 0, y: 0 };
@@ -31,9 +30,6 @@ const useIndex = (props: UseIndexProps) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // $(`.table-box`).on('mouseup', () => {
-    //   $(`.table-bar`).off('mousemove');
-    // });
     $(document).on('click', function(e: any) {
       var _con = $('.table-box');
       if (!_con.is(e.target) && _con.has(e.target).length === 0) {
@@ -164,9 +160,9 @@ const useIndex = (props: UseIndexProps) => {
     $(`#${id} .table-editor td`).off('mouseover');
     setVisible(false);
     // 清除编辑区域
-    const dom = document.querySelector('.table-editable')
+    const dom = document.querySelector('.table-edit-area')
     if (dom) {
-      ReactDOM.unmountComponentAtNode(dom)
+      dom.parentElement.remove()
     }
   };
 

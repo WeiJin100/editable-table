@@ -1,6 +1,6 @@
 {
   "name": "rc-editable-table",
-  "version": "0.2.5",
+  "version": "0.2.8",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && tsc",

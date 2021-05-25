@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useMemo, useEffect } from 'react';
+import React, { FC, useState, useRef, useMemo } from 'react';
 import { TableProps } from './table';
 import Menu from './menu';
 import useIndex from './hooks/useIndex';
@@ -20,10 +20,8 @@ const TableEditor: FC<TableProps> = props => {
     onMenu,
     start,
     end,
-    // content,
     onContentMenu,
     onInput,
-    // rows,
     tableCurrentWidth,
     onDragBars,
   } = useIndex({
@@ -42,27 +40,32 @@ const TableEditor: FC<TableProps> = props => {
   }, [style]);
 
   const onCellClick = () => {
-    // 单击清楚编辑区域
-    const dom = document.querySelector('.table-editable')
+    // 单击清除编辑区域
+    const dom = document.querySelector('.table-edit-area')
     if (dom) {
-      ReactDOM.unmountComponentAtNode(dom)
+      dom.parentElement.remove()
     }
   };
 
   const renderEditArea = (dom: any) => {
     const domValue = dom.getBoundingClientRect()
+    const div = document.createElement('div')
+    dom.appendChild(div)
 
     const ele = (
       <div
         style={{
-          minHeight: domValue.height + 1, // minHeight，可实现编辑区域随内容扩展
-          width: domValue.width + 1,
-          left: domValue.left,
-          top: domValue.top,
+          minHeight: domValue.height, // minHeight，可实现编辑区域随内容扩展
+          width: domValue.width,
           ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {})
         }}
         className="table-edit-area"
         onInput={onInput}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }}
         contentEditable={true}
         suppressContentEditableWarning={true}
         dangerouslySetInnerHTML={{ __html: dom.innerHTML }}
@@ -70,7 +73,7 @@ const TableEditor: FC<TableProps> = props => {
       >
       </div>
     );
-    ReactDOM.render(ele, document.querySelector('.table-editable'))
+    ReactDOM.render(ele, div)
     if (editRef && editRef.current) {
       setCursorPosition(editRef.current)
     }
@@ -100,7 +103,7 @@ const TableEditor: FC<TableProps> = props => {
     ele.focus();
   }
 
-  const onDouble = (e: any) => {
+  const onDoubleClick = (e: any) => {
     let dom = e.target;
 
     while (dom.tagName.toLocaleLowerCase() !== 'td') {
@@ -109,21 +112,12 @@ const TableEditor: FC<TableProps> = props => {
     renderEditArea(dom)
   }
 
-  const onDoubleClick = (e: any) => {
-    console.log(e, 'td')
-    if (e.target.tagName.toLocaleLowerCase() !== 'td') {
-      return
-    }
-    renderEditArea(e.target)
-  }
-
   const getContentEditable = (index: number, i: number) => {
     return [index, i].join('') === firstClickLocation.join('') && firstClickLocation.length === 2;
   };
 
   return (
     <div className="table-box" id={id}>
-      <div className="table-editable"></div>
       {visible && (
         <Menu
           lang={lang}
@@ -138,9 +132,16 @@ const TableEditor: FC<TableProps> = props => {
         {showDragBar && value.rows && value.rows.length > 0 && (
           <div className="table-bar" style={{ width: tableCurrentWidth }}>
             {value.rows.map((t: any, i: any) => (
-              <div className="bar-item" key={`bar-${i}`} style={{ width: t || 140 }}>
+              <div
+                className="bar-item"
+                key={`bar-${i}`}
+                style={{ width: t || 140 }}
+              >
                 {value.rows && i < value.rows.length - 1 && (
-                  <div className="row-trigger" onMouseDown={(e: any) => onDragBars(e, i)}></div>
+                  <div
+                    className="row-trigger"
+                    onMouseDown={(e: any) => onDragBars(e, i)}
+                  ></div>
                 )}
               </div>
             ))}
@@ -148,17 +149,21 @@ const TableEditor: FC<TableProps> = props => {
         )}
       </div>
       <table
-        className={`table-editor` + (bordered ? ' table-bordered' : '')}
+        className={`table-editor` + (bordered ? " table-bordered" : "")}
         ref={tableRef}
         onContextMenu={onContentMenu}
-        style={showDragBar ? {} : { width: '100%' }}
+        style={showDragBar ? {} : { width: "100%" }}
         cellPadding="0"
         cellSpacing="0"
       >
         {showDragBar && value.rows && value.rows.length > 0 && (
           <colgroup>
             {value.rows.map((t: number, i: any) => (
-              <col span={1} key={`colgroup-col-${i}`} style={{ width: t || 140 }} />
+              <col
+                span={1}
+                key={`colgroup-col-${i}`}
+                style={{ width: t || 140 }}
+              />
             ))}
           </colgroup>
         )}
@@ -169,18 +174,28 @@ const TableEditor: FC<TableProps> = props => {
                 <td
                   key={`${t.id}`}
                   style={{
-                    padding: '4px 8px',
+                    padding: "4px 8px",
                     ...tdStyle,
-                    ...(tdStyle.fontSize ? { lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {}),
-                    ...(t.props && (t.props.rowSpan === 0 || t.props.colSpan === 0) ? { display: 'none' } : {}),
+                    ...(tdStyle.fontSize
+                      ? { lineHeight: `calc(${tdStyle.fontSize} * 1.4)` }
+                      : {}),
+                    ...(t.props &&
+                    (t.props.rowSpan === 0 || t.props.colSpan === 0)
+                      ? { display: "none" }
+                      : {}),
                   }}
-                  {...(t.props ? { colSpan: t.props.colSpan, rowSpan: t.props.rowSpan } : {})}
+                  {...(t.props
+                    ? { colSpan: t.props.colSpan, rowSpan: t.props.rowSpan }
+                    : {})}
                   onClick={onCellClick}
                   onDoubleClick={(e: any) => onDoubleClick(e)}
-                  className={getContentEditable(index, i) ? 'td_bg td-edit' : ''}
-                  // dangerouslySetInnerHTML={{ __html: t.content }}
+                  className={
+                    getContentEditable(index, i) ? "td_bg td-edit" : ""
+                  }
                 >
-                  <div dangerouslySetInnerHTML={{ __html: t.content }} onDoubleClick={(e: any) => onDouble(e)}></div>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: t.content }}
+                  ></div>
                 </td>
               ))}
             </tr>

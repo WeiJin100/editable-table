@@ -46,7 +46,7 @@ const Index = () => {
     console.log('focus');
   };
   return (
-    <div>
+    <div style={{ width: 600 }}>
       <Table
         onFocus={onFocus}
         value={v1}
@@ -61,6 +61,7 @@ const Index = () => {
           border: '1px solid red',
           fontSize: '14px',
           height: '50px',
+          marginBottom: 20
         }}
       />
       <Table
@@ -68,7 +69,7 @@ const Index = () => {
         value={v2}
         showDragBar={true}
         lang="zh"
-        style={{ fontSize: '20px' }}
+        style={{ fontSize: '20px', marginBottom: 20 }}
         onChange={(v: any) => {
           console.log(v);
           setV2(v);
@@ -92,7 +93,7 @@ const Index = () => {
 
 const App = () => {
   return (
-    <div style={{ width: 600, margin: '0 auto' }} onClick={() => console.log(123)}>
+    <div style={{ width: 600, margin: '0 auto', overflowX: 'auto' }} onClick={() => console.log(123)}>
       <Index />
     </div>
   );

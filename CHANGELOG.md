@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/WeiJin100/editable-table/compare/v0.2.7...v0.2.8) (2021-05-25)
+
+
+### Bug Fixes
+
+* 修改编辑区边框样式 ([5b5118c](https://github.com/WeiJin100/editable-table/commit/5b5118ce6a46f85145ea6b716260a6a2c629d786))
+
+### [0.2.7](https://github.com/WeiJin100/editable-table/compare/v0.2.6...v0.2.7) (2021-05-25)
+
+
+### Bug Fixes
+
+* 改变编辑区域插入位置 ([ebdbae2](https://github.com/WeiJin100/editable-table/commit/ebdbae208425160f9e17754698d6b94fd7c81453))
+
+### [0.2.6](https://github.com/WeiJin100/editable-table/compare/v0.2.5...v0.2.6) (2021-05-25)
+
+
+### Bug Fixes
+
+* 页面resize或滚动时编辑区域跟随变动 ([6f724b7](https://github.com/WeiJin100/editable-table/commit/6f724b7d8392aa47705afcff4cd25f9c58fecb67))
+
 ### [0.2.5](https://github.com/WeiJin100/editable-table/compare/v0.2.4...v0.2.5) (2021-05-25)
 
 
