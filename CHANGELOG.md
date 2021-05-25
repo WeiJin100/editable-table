@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/WeiJin100/editable-table/compare/v0.2.7...v0.2.8) (2021-05-25)
+
+
+### Bug Fixes
+
+* 修改编辑区边框样式 ([5b5118c](https://github.com/WeiJin100/editable-table/commit/5b5118ce6a46f85145ea6b716260a6a2c629d786))
+
 ### [0.2.7](https://github.com/WeiJin100/editable-table/compare/v0.2.6...v0.2.7) (2021-05-25)
 
 
