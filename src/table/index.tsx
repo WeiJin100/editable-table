@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useMemo } from 'react';
+import React, { FC, useState, useRef, useMemo, useEffect } from 'react';
 import { TableProps } from './table';
 import Menu from './menu';
 import useIndex from './hooks/useIndex';
@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 const TableEditor: FC<TableProps> = props => {
   const barsRef = useRef(null);
   const tableRef = useRef(null);
+  const editRef = useRef(null); // 编辑区
   const { bordered = true, showDragBar = true, lang, value, id, style } = props;
   const [firstClickLocation, setfirstClickLocation] = useState<number[]>([]);
 
@@ -65,14 +66,41 @@ const TableEditor: FC<TableProps> = props => {
         contentEditable={true}
         suppressContentEditableWarning={true}
         dangerouslySetInnerHTML={{ __html: dom.innerHTML }}
+        ref={editRef}
       >
       </div>
     );
     ReactDOM.render(ele, document.querySelector('.table-editable'))
+    if (editRef && editRef.current) {
+      setCursorPosition(editRef.current)
+    }
+  }
+
+  const setCursorPosition = (ele: any) => {
+    // Creates range object
+    const setpos = document.createRange();
+
+    // Creates object for selection
+    const set = window.getSelection();
+
+    // Set start position of range
+    setpos.setStart(ele, 1);
+
+    // Collapse range within its boundary points
+    // Returns boolean
+    setpos.collapse(true);
+
+    // Remove all ranges set
+    set.removeAllRanges();
+
+    // Add range with respect to range object.
+    set.addRange(setpos);
+
+    // Set cursor on focus
+    ele.focus();
   }
 
   const onDouble = (e: any) => {
-    console.log(e, 'div')
     let dom = e.target;
 
     while (dom.tagName.toLocaleLowerCase() !== 'td') {

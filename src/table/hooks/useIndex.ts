@@ -399,8 +399,8 @@ const useIndex = (props: UseIndexProps) => {
 
   const onInput = (e: any) => {
     const v = e.target.innerHTML;
-    console.log(e)
-    // const text = v.replaceAll("\n\n", "\n").replaceAll("\n", "<br />")
+    // const text = v.replaceAll("\n\n\n", "\n\n").replaceAll("\n", "<br />")
+    // const text = v.replaceAll("\n", "<br />")
     const temp = JSON.parse(JSON.stringify([...value.children]));
     temp[mouse_begin.x].children[mouse_begin.y].content = v;
     // setContent(temp);

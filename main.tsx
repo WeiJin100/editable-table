@@ -10,7 +10,7 @@ const value = {
       id: '1231q31aqq',
       children: [
         { id: 'asdawqwe', content: '1' },
-        { id: 'asdawqasawe', content: '2' },
+        { id: 'asdawqasawe', content: '2qwe' },
         { id: 'asdawzxcqwe', content: '3' },
       ],
     },
