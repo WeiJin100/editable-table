@@ -45,6 +45,7 @@
     }
 
     td {
+      position: relative;
       word-break: break-all;
       min-height: 35px;
       vertical-align: top;
@@ -112,10 +113,13 @@
 }
 
 .table-edit-area {
-  position: fixed;
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 10;
-  outline: 2px solid #0589f3;
+  border: 1px solid #0589f3;
   // outline-offset: -1px;
+  outline: none;
   cursor: text;
   background-color: #fff;
   font-size: 14px;

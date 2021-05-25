@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useMemo, useEffect } from 'react';
+import React, { FC, useState, useRef, useMemo } from 'react';
 import { TableProps } from './table';
 import Menu from './menu';
 import useIndex from './hooks/useIndex';
@@ -11,8 +11,6 @@ const TableEditor: FC<TableProps> = props => {
   const editRef = useRef(null); // 编辑区
   const { bordered = true, showDragBar = true, lang, value, id, style } = props;
   const [firstClickLocation, setfirstClickLocation] = useState<number[]>([]);
-  const [editDom, setEditDom] = useState(null) // 记录编辑区dom
-  const [editRect, setEditRect] = useState(null)
 
   const resetSecondLocation = () => setfirstClickLocation([]);
 
@@ -22,10 +20,8 @@ const TableEditor: FC<TableProps> = props => {
     onMenu,
     start,
     end,
-    // content,
     onContentMenu,
     onInput,
-    // rows,
     tableCurrentWidth,
     onDragBars,
   } = useIndex({
@@ -36,35 +32,6 @@ const TableEditor: FC<TableProps> = props => {
     resetSecondLocation,
   });
 
-  useEffect(() => {
-    const updateSize = () => {
-      if (editDom && editRef.current) {
-        const domValue = editDom.getBoundingClientRect()
-
-        setEditRect(domValue)
-      }
-    }
-    window.addEventListener('resize', updateSize)
-    window.addEventListener('scroll', updateSize)
-    return () => {
-      window.removeEventListener('resize', updateSize)
-      window.removeEventListener('scroll', updateSize)
-    }
-  }, [editDom])
-
-  useEffect(() => {
-    if (editRect) {
-      const target: any = document.querySelector(".table-edit-area")
-
-      if (target) {
-        target.style.minHeight = `${editRect.height + 1}px`
-        target.style.width = `${editRect.width + 1}px`
-        target.style.left = `${editRect.left}px`
-        target.style.top = `${editRect.top}px`
-      }
-    }
-  }, [editRect])
-
   const tdStyle = useMemo(() => {
     if (style && typeof style === 'object') {
       return style;
@@ -73,27 +40,32 @@ const TableEditor: FC<TableProps> = props => {
   }, [style]);
 
   const onCellClick = () => {
-    // 单击清楚编辑区域
-    const dom = document.querySelector('.table-editable')
+    // 单击清除编辑区域
+    const dom = document.querySelector('.table-edit-area')
     if (dom) {
-      ReactDOM.unmountComponentAtNode(dom)
+      dom.parentElement.remove()
     }
   };
 
   const renderEditArea = (dom: any) => {
     const domValue = dom.getBoundingClientRect()
+    const div = document.createElement('div')
+    dom.appendChild(div)
 
     const ele = (
       <div
         style={{
-          minHeight: domValue.height + 1, // minHeight，可实现编辑区域随内容扩展
-          width: domValue.width + 1,
-          left: domValue.left,
-          top: domValue.top,
+          minHeight: domValue.height, // minHeight，可实现编辑区域随内容扩展
+          width: domValue.width,
           ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {})
         }}
         className="table-edit-area"
         onInput={onInput}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }}
         contentEditable={true}
         suppressContentEditableWarning={true}
         dangerouslySetInnerHTML={{ __html: dom.innerHTML }}
@@ -101,7 +73,7 @@ const TableEditor: FC<TableProps> = props => {
       >
       </div>
     );
-    ReactDOM.render(ele, document.querySelector('.table-editable'))
+    ReactDOM.render(ele, div)
     if (editRef && editRef.current) {
       setCursorPosition(editRef.current)
     }
@@ -132,13 +104,11 @@ const TableEditor: FC<TableProps> = props => {
   }
 
   const onDoubleClick = (e: any) => {
-    console.log(e)
     let dom = e.target;
 
     while (dom.tagName.toLocaleLowerCase() !== 'td') {
       dom = dom.parentElement
     }
-    setEditDom(dom)
     renderEditArea(dom)
   }
 
@@ -148,7 +118,6 @@ const TableEditor: FC<TableProps> = props => {
 
   return (
     <div className="table-box" id={id}>
-      <div className="table-editable"></div>
       {visible && (
         <Menu
           lang={lang}
@@ -226,7 +195,6 @@ const TableEditor: FC<TableProps> = props => {
                 >
                   <div
                     dangerouslySetInnerHTML={{ __html: t.content }}
-                    // onDoubleClick={(e: any) => onDouble(e)}
                   ></div>
                 </td>
               ))}
