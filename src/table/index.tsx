@@ -52,11 +52,18 @@ const TableEditor: FC<TableProps> = props => {
     const div = document.createElement('div')
     dom.appendChild(div)
 
+    const borderWidth = tdStyle.border ? String(tdStyle.border).split(" ")[0] : "1px";
+    const offset = `calc(-${borderWidth} / 2)`;
+
     const ele = (
       <div
         style={{
           minHeight: domValue.height, // minHeight，可实现编辑区域随内容扩展
           width: domValue.width,
+          outlineWidth: borderWidth,
+          left: offset,
+          top: offset,
+          // outlineOffset: offset,
           ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {})
         }}
         className="table-edit-area"

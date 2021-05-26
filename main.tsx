@@ -58,7 +58,7 @@ const Index = () => {
         }}
         id="t1"
         style={{
-          border: '1px solid red',
+          border: '3px solid red',
           fontSize: '14px',
           height: '50px',
           marginBottom: 20
