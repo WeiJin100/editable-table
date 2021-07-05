@@ -64,7 +64,7 @@ const TableEditor: FC<TableProps> = props => {
           left: offset,
           top: offset,
           // outlineOffset: offset,
-          ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: `calc(${tdStyle.fontSize} * 1.4)` } : {})
+          ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: tdStyle.lineHeight } : {})
         }}
         className="table-edit-area"
         onInput={onInput}
@@ -122,6 +122,8 @@ const TableEditor: FC<TableProps> = props => {
   const getContentEditable = (index: number, i: number) => {
     return [index, i].join('') === firstClickLocation.join('') && firstClickLocation.length === 2;
   };
+
+  const borderStyle = tdStyle && tdStyle.border ? tdStyle.border : '1px solid #d9d9d9';
 
   return (
     <div className="table-box" id={id}>
@@ -182,11 +184,7 @@ const TableEditor: FC<TableProps> = props => {
                   key={`${t.id}`}
                   style={{
                     padding: "4px 8px",
-                    ...tdStyle,
-                    fontSize: 'inherit',
-                    ...(tdStyle.fontSize
-                      ? { lineHeight: `calc(${tdStyle.fontSize} * 1.4)` }
-                      : {}),
+                    border: borderStyle,
                     ...t.style,
                     ...(t.props &&
                     (t.props.rowSpan === 0 || t.props.colSpan === 0)

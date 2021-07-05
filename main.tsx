@@ -72,7 +72,8 @@ const Index = () => {
           border: '1px solid red',
           fontSize: '14px',
           height: '50px',
-          marginBottom: 20
+          marginBottom: 20,
+          lineHeight: 1.5
         }}
         onEdit={onEdit}
       />
@@ -81,7 +82,7 @@ const Index = () => {
         value={v2}
         showDragBar={true}
         lang="zh"
-        style={{ fontSize: '20px', marginBottom: 20 }}
+        style={{ fontSize: '20px', marginBottom: 20, lineHeight: 1.5 }}
         onChange={(v: any) => {
           console.log(v);
           setV2(v);
@@ -93,6 +94,7 @@ const Index = () => {
         value={v3}
         showDragBar={true}
         lang="zh"
+        style={{ lineHeight: 1.5, fontSize: '16px' }}
         onChange={(v: any) => {
           console.log(3);
           setV3(v);
