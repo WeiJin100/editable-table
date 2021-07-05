@@ -64,7 +64,6 @@ const TableEditor: FC<TableProps> = props => {
           left: offset,
           top: offset,
           // outlineOffset: offset,
-          ...(tdStyle.fontSize ? { fontSize: tdStyle.fontSize, lineHeight: tdStyle.lineHeight } : {})
         }}
         className="table-edit-area"
         onInput={onInput}
@@ -161,7 +160,7 @@ const TableEditor: FC<TableProps> = props => {
         className={`table-editor` + (bordered ? " table-bordered" : "")}
         ref={tableRef}
         onContextMenu={onContentMenu}
-        style={showDragBar ? { ...tdStyle } : { width: "100%", ...tdStyle }}
+        style={showDragBar ? { border: borderStyle, ...tdStyle } : { width: "100%", border: borderStyle, ...tdStyle }}
         cellPadding="0"
         cellSpacing="0"
       >
