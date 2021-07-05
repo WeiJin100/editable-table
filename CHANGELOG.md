@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.5](https://github.com/WeiJin100/editable-table/compare/v1.1.4...v1.1.5) (2021-07-05)
+
+
+### Bug Fixes
+
+* 编辑区域样式继承父级元素 ([00e6228](https://github.com/WeiJin100/editable-table/commit/00e6228d2009527595b1d6e5f829180c162136c2))
+
 ### [1.1.4](https://github.com/WeiJin100/editable-table/compare/v1.1.3...v1.1.4) (2021-07-05)
 
 
