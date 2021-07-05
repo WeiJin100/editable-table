@@ -10,12 +10,12 @@ export default defineConfig({
       name: 'rc-editable-table'
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'juqery'],
+      external: ['react', 'react-dom', 'jquery'],
       output: {
         globals: {
           react: 'React',
           "react-dom": 'ReactDom',
-          juqery: '$'
+          jquery: '$'
         }
       }
     }

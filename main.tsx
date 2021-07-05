@@ -13,6 +13,10 @@ const value = {
         { id: 'asdawqasawe', content: '2qwe' },
         { id: 'asdawzxcqwe', content: '3' },
       ],
+      style: {
+        backgroundColor: '#f4f4f4',
+        fontSize: '18px'
+      }
     },
     {
       id: '1231qhjffg31aqq',
@@ -45,6 +49,13 @@ const Index = () => {
   const onFocus = () => {
     console.log('focus');
   };
+
+  const onEdit = (type: string, indexArray: number[]) => {
+    console.log(type)
+    console.log(indexArray)
+  }
+
+
   return (
     <div style={{ width: 600 }}>
       <Table
@@ -58,11 +69,12 @@ const Index = () => {
         }}
         id="t1"
         style={{
-          border: '3px solid red',
+          border: '1px solid red',
           fontSize: '14px',
           height: '50px',
           marginBottom: 20
         }}
+        onEdit={onEdit}
       />
       <Table
         onFocus={onFocus}

@@ -159,7 +159,7 @@ const TableEditor: FC<TableProps> = props => {
         className={`table-editor` + (bordered ? " table-bordered" : "")}
         ref={tableRef}
         onContextMenu={onContentMenu}
-        style={showDragBar ? {} : { width: "100%" }}
+        style={showDragBar ? { ...tdStyle } : { width: "100%", ...tdStyle }}
         cellPadding="0"
         cellSpacing="0"
       >
@@ -176,16 +176,18 @@ const TableEditor: FC<TableProps> = props => {
         )}
         <tbody>
           {value.children.map((row, index) => (
-            <tr key={row.id}>
+            <tr key={row.id} style={row.style ? row.style : {}}>
               {row.children.map((t, i) => (
                 <td
                   key={`${t.id}`}
                   style={{
                     padding: "4px 8px",
                     ...tdStyle,
+                    fontSize: 'inherit',
                     ...(tdStyle.fontSize
                       ? { lineHeight: `calc(${tdStyle.fontSize} * 1.4)` }
                       : {}),
+                    ...t.style,
                     ...(t.props &&
                     (t.props.rowSpan === 0 || t.props.colSpan === 0)
                       ? { display: "none" }

@@ -25,6 +25,7 @@ const useIndex = (props: UseIndexProps) => {
     onFocus,
     onChange,
     id,
+    onEdit
   } = props;
   const [menuStyle, setMenuStyle] = useState({ left: 0, top: 0 });
   const [visible, setVisible] = useState(false);
@@ -57,7 +58,8 @@ const useIndex = (props: UseIndexProps) => {
     const dom: any = tableRef.current;
 
     if (dom) {
-      const tbody = dom.children[showDragBar ? 1 : 0];
+      // const tbody = dom.children[showDragBar ? 1 : 0];
+      const tbody: any = [...dom.children].filter((v: { nodeName: string; }) => v.nodeName === 'TBODY')[0]
 
       for (let i = 0; i < value.children.length; i++) {
         for (let j = 0; j < value.children[i].children.length; j++) {
@@ -87,8 +89,8 @@ const useIndex = (props: UseIndexProps) => {
         // secondClickLocation = []; // 右键时重置二次点击
         resetSecondLocation && resetSecondLocation();
         setMenuStyle({
-          left: getDomOffsetLeft(this) + this.offsetWidth - 20,
-          top: getDomOffsetTop(this) + this.offsetHeight - 20,
+          left: getDomOffsetLeft(this) + this.offsetWidth / 2,
+          top: getDomOffsetTop(this) + this.offsetHeight / 2,
         });
         setVisible(true);
         return;
@@ -168,6 +170,12 @@ const useIndex = (props: UseIndexProps) => {
 
   const onMenu = (type: string) => {
     switch (type) {
+      case 'editRow':
+        onEditType(type)
+        break;
+      case 'editCell':
+        onEditType(type)
+        break;
       case 'merge':
         onMerge();
         break;
@@ -185,6 +193,14 @@ const useIndex = (props: UseIndexProps) => {
         break;
     }
     onClear();
+  };
+
+  // 编辑行、编辑单元格
+  const onEditType = (type: string) => {
+    const rowIndex = mouse_begin.x
+    const cellIndex = mouse_end.y
+
+    onEdit && onEdit(type, [rowIndex, cellIndex]);
   };
 
   const onMerge = () => {

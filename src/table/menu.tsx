@@ -53,6 +53,23 @@ const Menu: FC<MenuProps> = props => {
 
   return (
     <div className="menu" style={{ ...menuStyle }}>
+      {/* 只能编辑单行，不支持跨行 */}
+      {end.x === start.x && (
+        <div className="menu-item" onClick={(e: any) => onMenu(e, 'editRow')}>
+          <InsertRowLeftOutlined />
+          {p('editRow')}
+        </div>
+      )}
+      {/* 只能编辑单个单元格，不支持多选 */}
+      {(end.x === start.x && end.y === start.y) && (
+        <div className="menu-item" onClick={(e: any) => onMenu(e, 'editCell')}>
+          <InsertRowRightOutlined />
+          {p('editCell')}
+        </div>
+      )}
+      {end.x === start.x && (
+        <div className="divider" />
+      )}
       <div className="menu-item" onClick={(e: any) => onMenu(e, 'left')}>
         <InsertRowLeftOutlined />
         {p('insertLeft')}

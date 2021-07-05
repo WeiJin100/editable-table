@@ -1,4 +1,6 @@
 export default {
+  editRow: '编辑行',
+  editCell: '编辑单元格',
   insertLeft: '左边插入列',
   insertRight: '右边插入列',
   insertTop: '上方插入行',
