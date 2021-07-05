@@ -134,6 +134,7 @@ const TableEditor: FC<TableProps> = props => {
           end={end}
           onClick={onMenu}
           menuStyle={menuStyle}
+          onContentMenu={onContentMenu}
         />
       )}
       <div className="table-wrap" ref={barsRef}>

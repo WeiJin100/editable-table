@@ -8,6 +8,8 @@ import {
   SplitCellsOutlined,
   DeleteColumnOutlined,
   DeleteRowOutlined,
+  EditOutlined,
+  FormOutlined
 } from '@ant-design/icons';
 import { TableColProps, InitTableColumnsProps, language } from './table';
 import zh from './i18n/zh';
@@ -22,10 +24,11 @@ interface MenuProps {
   end: InitTableColumnsProps;
   menuStyle?: React.CSSProperties;
   lang?: language;
+  onContentMenu?: (e: any) => void;
 }
 
 const Menu: FC<MenuProps> = props => {
-  const { onClick, cellData, start, end, menuStyle, lang = 'zh' } = props;
+  const { onClick, cellData, start, end, menuStyle, lang = 'zh', onContentMenu } = props;
 
   let result;
   if (lang === 'zh') {
@@ -52,18 +55,18 @@ const Menu: FC<MenuProps> = props => {
   };
 
   return (
-    <div className="menu" style={{ ...menuStyle }}>
+    <div className="menu" style={{ ...menuStyle }} onContextMenu={onContentMenu}>
       {/* 只能编辑单行，不支持跨行 */}
       {end.x === start.x && (
         <div className="menu-item" onClick={(e: any) => onMenu(e, 'editRow')}>
-          <InsertRowLeftOutlined />
+          <EditOutlined />
           {p('editRow')}
         </div>
       )}
       {/* 只能编辑单个单元格，不支持多选 */}
       {(end.x === start.x && end.y === start.y) && (
         <div className="menu-item" onClick={(e: any) => onMenu(e, 'editCell')}>
-          <InsertRowRightOutlined />
+          <FormOutlined />
           {p('editCell')}
         </div>
       )}
