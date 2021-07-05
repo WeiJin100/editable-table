@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/WeiJin100/editable-table/compare/v1.1.2...v1.1.3) (2021-07-05)
+
+
+### Features
+
+* 支持自定义行和单元格样式 ([69f49d4](https://github.com/WeiJin100/editable-table/commit/69f49d4014ff00b3d08130c4e7bf35a744543597))
+
 ### [1.1.2](https://github.com/WeiJin100/editable-table/compare/v1.1.1...v1.1.2) (2021-05-26)
 
 ### [1.1.1](https://github.com/WeiJin100/editable-table/compare/v1.1.0...v1.1.1) (2021-05-26)
