@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/WeiJin100/editable-table/compare/v1.1.5...v1.1.6) (2021-07-05)
+
+
+### Bug Fixes
+
+* 阻止菜单的右键事件 ([0152a0a](https://github.com/WeiJin100/editable-table/commit/0152a0ab7717b1954406d1b97ddc67a85970c666))
+
 ### [1.1.5](https://github.com/WeiJin100/editable-table/compare/v1.1.4...v1.1.5) (2021-07-05)
 
 
