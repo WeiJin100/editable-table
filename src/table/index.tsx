@@ -45,9 +45,13 @@ const TableEditor: FC<TableProps> = props => {
     if (dom) {
       dom.parentElement.remove()
     }
+    editRef.current = null
   };
 
   const renderEditArea = (dom: any) => {
+    if (editRef && editRef.current) {
+      return;
+    }
     const domValue = dom.getBoundingClientRect()
     const div = document.createElement('div')
     dom.appendChild(div)
