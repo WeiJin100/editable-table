@@ -57,14 +57,14 @@ const Menu: FC<MenuProps> = props => {
   return (
     <div className="menu" style={{ ...menuStyle }} onContextMenu={onContentMenu}>
       {/* 只能编辑单行，不支持跨行 */}
-      {false && end.x === start.x && (
+      {end.x === start.x && (
         <div className="menu-item" onClick={(e: any) => onMenu(e, 'editRow')}>
           <EditOutlined />
           {p('editRow')}
         </div>
       )}
       {/* 只能编辑单个单元格，不支持多选 */}
-      {false && (end.x === start.x && end.y === start.y) && (
+      {(end.x === start.x && end.y === start.y) && (
         <div className="menu-item" onClick={(e: any) => onMenu(e, 'editCell')}>
           <FormOutlined />
           {p('editCell')}
