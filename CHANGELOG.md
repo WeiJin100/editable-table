@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.8](https://github.com/WeiJin100/editable-table/compare/v1.1.7...v1.1.8) (2021-07-12)
+
+
+### Bug Fixes
+
+* 开放邮件编辑行 单元格功能 ([6b1fd87](https://github.com/WeiJin100/editable-table/commit/6b1fd871f1042fcfe903f3c6859f1d5d55c73076))
+
 ### [1.1.7](https://github.com/WeiJin100/editable-table/compare/v1.1.6...v1.1.7) (2021-07-06)
 
 
