@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.10](https://github.com/WeiJin100/editable-table/compare/v1.1.9...v1.1.10) (2021-07-26)
+
+
+### Bug Fixes
+
+* 样式修改-居中 ([a264812](https://github.com/WeiJin100/editable-table/commit/a264812dd99ea8a38b843cb10101f5b0e50f93c3))
+
 ### [1.1.9](https://github.com/WeiJin100/editable-table/compare/v1.1.8...v1.1.9) (2021-07-26)
 
 
