@@ -48,6 +48,13 @@ const TableEditor: FC<TableProps> = props => {
     editRef.current = null
   };
 
+  const onPaste = (e: any) => {
+    // 以纯文本方式粘贴
+    e.preventDefault()
+    var text = e.clipboardData.getData('text/plain')
+    document.execCommand('insertText', false, text)
+  };
+
   const renderEditArea = (dom: any) => {
     if (editRef && editRef.current) {
       return;
@@ -80,6 +87,7 @@ const TableEditor: FC<TableProps> = props => {
         suppressContentEditableWarning={true}
         dangerouslySetInnerHTML={{ __html: dom.innerHTML }}
         ref={editRef}
+        onPaste={onPaste}
       >
       </div>
     );
